@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Request a consultation with LaBass Technologies." />
+    <meta name="theme-color" content="#295f97" />
+    <title>Request a Consultation | LaBass Technologies</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body class="consultation-page">
+    <header class="site-header" data-site-header>
+      <a class="brand" href="/" aria-label="LaBass Technologies home"><img src="/logo-full.webp" alt="LaBass Technologies" /></a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/#services">Services</a>
+        <a href="/#testimonials">Testimonials</a>
+      </nav>
+      <a class="header-cta" href="tel:+19189551381" aria-label="Call Skip at 918-955-1381"><svg class="phone-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15.5v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 1.12 2.82 2 2 0 0 1 3.11.64h3a2 2 0 0 1 2 1.72c.12.9.34 1.77.67 2.61a2 2 0 0 1-.45 2.11L7.06 8.35a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.84.33 1.71.55 2.61.67A2 2 0 0 1 21 15.5Z" /></svg><span>918-955-1381</span></a>
+      <button class="menu-button" type="button" aria-label="Open navigation menu" aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span></button>
+    </header>
+
+    <div class="menu-overlay"></div>
+    <aside class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
+      <div class="menu-topline"><span>Navigation</span><button class="close-button" type="button" aria-label="Close navigation menu">×</button></div>
+      <nav><a href="/">Home <span>01</span></a><a href="/#services">Services <span>02</span></a><a href="/#testimonials">Testimonials <span>03</span></a></nav>
+      <a class="menu-cta" href="/request-consultation/">Request a consultation <span aria-hidden="true">↗</span></a>
+      <p>Oklahoma + Northwest Arkansas</p>
+    </aside>
+
+    <main class="consultation-main">
+      <div class="consultation-layout">
+        <section class="consultation-copy" aria-labelledby="consultation-heading">
+          <div class="section-label"><span>Request a consultation</span><i></i></div>
+          <h1 id="consultation-heading">Let’s plan the right system for your space.</h1>
+          <p>Tell us a little about your facility and project. We’ll follow up to schedule a no-pressure site walk and talk through the right next step.</p>
+          <div class="consultation-direct">
+            <span>Prefer to talk now?</span>
+            <a href="tel:+19189551381">(918) 955-1381</a>
+            <a href="mailto:support@labass.tech">support@labass.tech</a>
+          </div>
+        </section>
+
+        <form class="consultation-form" action="https://formspree.io/f/mwvjqlzp" method="POST">
+          <input type="hidden" name="_subject" value="New Website Inquiry — LaBass Technologies" />
+          <h2>Start your project</h2>
+          <p>A few details are all we need to get the conversation started.</p>
+          <div class="form-grid">
+            <div class="form-field"><label for="name">Your name *</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
+            <div class="form-field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" /></div>
+            <div class="form-field"><label for="email">Email *</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+            <div class="form-field"><label for="organization">Organization / facility</label><input id="organization" name="organization" type="text" autocomplete="organization" /></div>
+            <div class="form-field form-field--full"><label for="service-interest">Primary service interest *</label><select id="service-interest" name="serviceInterest" required><option value="" selected disabled>Select primary service...</option><option>Fiber optic backbone</option><option>Network closet rehabilitation</option><option>Structured cabling</option><option>Physical security / surveillance</option><option>Access control system</option><option>Wireless / Wi-Fi infrastructure</option><option>AV &amp; sound systems</option><option>VoIP phone system</option><option>Maintenance plan</option><option>Multiple services / not sure yet</option></select></div>
+            <div class="form-field form-field--full"><label for="message">Tell us about your project</label><textarea id="message" name="message" rows="5" placeholder="Describe your current infrastructure, pain points, or goals..."></textarea></div>
+          </div>
+          <button class="primary-button" type="submit"><strong>Request my free site walk</strong><span aria-hidden="true">↗</span></button>
+          <p class="form-note">No commitment required. Site walks are 100% free.</p>
+          <p class="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-content"><div class="footer-brand"><img src="/logo-full.webp" alt="LaBass Technologies" /><p>Oklahoma + Northwest Arkansas</p></div><div class="footer-links"><p class="footer-heading">Explore</p><a href="/">Home</a><a href="/#services">Services</a><a href="/#testimonials">Testimonials</a></div><div class="footer-contact"><p class="footer-heading">Contact</p><a href="tel:+19189551381">(918) 955-1381</a><a href="mailto:support@labass.tech">support@labass.tech</a><a href="https://www.facebook.com/LaBassTech" target="_blank" rel="noopener noreferrer">Facebook <span aria-hidden="true">↗</span></a></div></div>
+      <div class="footer-bottom"><span>© 2026 LaBass Technologies, LLC</span><span>Low-voltage + security integration</span></div>
+    </footer>
+    <script src="/script.js"></script>
+  </body>
+</html>
