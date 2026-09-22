@@ -19,10 +19,13 @@ func main() {
 
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "18080"
+		port = "8080"
 	}
 
 	mux := http.NewServeMux()
+	mux.HandleFunc("/request-consultation/", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/#contact-form", http.StatusMovedPermanently)
+	})
 	mux.Handle("/", http.FileServer(http.Dir("public")))
 
 	log.Printf("LaBass Technologies is running at http://0.0.0.0:%s", port)

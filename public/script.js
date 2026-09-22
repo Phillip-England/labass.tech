@@ -18,7 +18,7 @@ menuLinks.forEach((link) => link.addEventListener('click', () => setMenu(false))
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
 
 const header = document.querySelector('[data-site-header]');
-const hero = document.querySelector('.hero, .service-page-hero');
+const hero = document.querySelector('.hero, .about-hero, .service-page-hero');
 
 function updateLogoTransition() {
   if (!header || !hero) return;
@@ -27,6 +27,7 @@ function updateLogoTransition() {
   document.documentElement.style.setProperty('--hero-progress', progress.toFixed(3));
   document.documentElement.style.setProperty('--header-progress', progress.toFixed(3));
   header.classList.toggle('is-scrolled', progress > 0.04);
+  body.classList.toggle('has-left-hero', window.scrollY >= heroHeight);
 }
 
 if (hero) {
@@ -41,16 +42,21 @@ if (hero) {
 if (header && !header.querySelector('.header-consultation')) {
   const consultationAction = document.createElement('a');
   consultationAction.className = 'header-consultation';
-  consultationAction.href = '/request-consultation/';
-  consultationAction.textContent = 'Request a consultation';
+  consultationAction.href = body.classList.contains('service-page') ? '/#contact-form' : '#contact-form';
+  consultationAction.setAttribute('aria-label', 'Request a consultation');
+  consultationAction.innerHTML = `
+    <strong>Request a consultation</strong><span aria-hidden="true">↗</span>
+  `;
   header.insertBefore(consultationAction, header.querySelector('.header-cta'));
 }
 
-document.querySelectorAll('a.primary-button, a.menu-cta, a.section-link').forEach((link) => {
-  link.href = '/request-consultation/';
-});
-
-document.querySelectorAll('.desktop-nav a[href="#contact"], .mobile-menu nav a[href="#contact"]').forEach((link) => link.remove());
+if (menu && !menu.querySelector('.mobile-phone-action')) {
+  const phoneAction = document.createElement('a');
+  phoneAction.className = 'mobile-phone-action';
+  phoneAction.href = 'tel:+19189551381';
+  phoneAction.innerHTML = 'Call (918) 955-1381 <span aria-hidden="true">↗</span>';
+  menu.querySelector('.menu-cta').insertAdjacentElement('afterend', phoneAction);
+}
 
 const consultationForm = document.querySelector('.consultation-form');
 if (consultationForm) {
