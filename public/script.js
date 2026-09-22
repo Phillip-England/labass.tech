@@ -18,7 +18,7 @@ menuLinks.forEach((link) => link.addEventListener('click', () => setMenu(false))
 document.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
 
 const header = document.querySelector('[data-site-header]');
-const hero = document.querySelector('.hero');
+const hero = document.querySelector('.hero, .service-page-hero');
 
 function updateLogoTransition() {
   const heroHeight = hero.offsetHeight;
@@ -31,3 +31,18 @@ function updateLogoTransition() {
 window.addEventListener('scroll', updateLogoTransition, { passive: true });
 window.addEventListener('resize', updateLogoTransition);
 updateLogoTransition();
+
+const revealSections = document.querySelectorAll('.reveal-on-scroll');
+
+if ('IntersectionObserver' in window) {
+  document.documentElement.classList.add('has-reveal');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.2 });
+
+  revealSections.forEach((section) => revealObserver.observe(section));
+}
