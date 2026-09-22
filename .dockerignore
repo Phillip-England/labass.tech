@@ -1,0 +1,9 @@
+.git
+.gitignore
+config/
+data/
+current-site/
+tmp/
+temp/
+*.log
+Dockerfile

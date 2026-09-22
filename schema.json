@@ -1,0 +1,10 @@
+{
+  "variables": [
+    {
+      "name": "PORT",
+      "description": "HTTP port for the LaBass Technologies web server. Uppr's default Docker port is 8080.",
+      "example": "8080",
+      "required": false
+    }
+  ]
+}
