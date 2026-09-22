@@ -2,8 +2,8 @@
   "variables": [
     {
       "name": "PORT",
-      "description": "HTTP port for the LaBass Technologies web server. Defaults to the dedicated port 18080.",
-      "example": "18080",
+      "description": "HTTP port for the LaBass Technologies web server. Defaults to 8839.",
+      "example": "8839",
       "required": false
     }
   ]

@@ -11,6 +11,6 @@ WORKDIR /app
 COPY --from=build /out/labass-tech /app/labass-tech
 COPY public /app/public
 
-EXPOSE 18080
+EXPOSE 8839
 
 CMD ["/app/labass-tech"]
