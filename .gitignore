@@ -1,0 +1,25 @@
+# Logs
+*.log
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Go build and test artifacts
+bin/
+*.test
+coverage.out
+labass.tech
+
+# Temporary files
+tmp/
+temp/
+
+# Editor settings
+.idea/
+.vscode/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
