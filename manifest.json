@@ -1,0 +1,36 @@
+{
+  "name": "LaBass Technologies",
+  "short_name": "LaBass",
+  "brand": {
+    "primary_color": "#295f97",
+    "white": "#ffffff",
+    "description": "Professional camera, security, network cabling, and low-voltage systems."
+  },
+  "contact": {
+    "phone": "918-955-1381",
+    "telephone_uri": "tel:+19189551381"
+  },
+  "service_area": "Oklahoma and Northwest Arkansas",
+  "services": {
+    "heading": "Core Services",
+    "description": "Low-voltage, physical security, network, and communications systems for businesses across Oklahoma and Northwest Arkansas.",
+    "categories": [
+      {
+        "name": "Security Camera Installation",
+        "description": "IP video surveillance and security camera system installation."
+      },
+      {
+        "name": "Access Control",
+        "description": "Door access control system installation."
+      },
+      {
+        "name": "Network/Fiber",
+        "description": "Fiber optic backbone installation, structured Cat5e/Cat6/Cat6A cabling, enterprise Wi-Fi deployment, and network closet organization."
+      },
+      {
+        "name": "Voice Over IP",
+        "description": "Business VoIP phone system and IP PBX installation."
+      }
+    ]
+  }
+}
