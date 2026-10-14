@@ -6,14 +6,22 @@ const hero = document.querySelector('.hero, .about-hero, .service-page-hero');
 function updateLogoTransition() {
   if (!header || !hero) return;
   const heroHeight = hero.offsetHeight;
-  const progress = Math.min(Math.max(window.scrollY / (heroHeight * 0.62), 0), 1);
+  const position = Math.min(Math.max(window.scrollY / (heroHeight * 0.72), 0), 1);
+  const progress = position * position * (3 - 2 * position);
   document.documentElement.style.setProperty('--hero-progress', progress.toFixed(3));
   document.documentElement.style.setProperty('--header-progress', progress.toFixed(3));
   header.classList.toggle('is-scrolled', progress > 0.04);
 }
 
 if (hero) {
-  window.addEventListener('scroll', updateLogoTransition, { passive: true });
+  let scrollFrame = 0;
+  window.addEventListener('scroll', () => {
+    if (scrollFrame) return;
+    scrollFrame = window.requestAnimationFrame(() => {
+      updateLogoTransition();
+      scrollFrame = 0;
+    });
+  }, { passive: true });
   window.addEventListener('resize', updateLogoTransition);
   updateLogoTransition();
 } else if (header) {
@@ -25,9 +33,9 @@ if (header && !header.querySelector('.header-consultation')) {
   const consultationAction = document.createElement('a');
   consultationAction.className = 'header-consultation';
   consultationAction.href = body.classList.contains('service-page') ? '/#contact-form' : '#contact-form';
-  consultationAction.setAttribute('aria-label', 'Request a consultation');
+  consultationAction.setAttribute('aria-label', 'Free Consultation');
   consultationAction.innerHTML = `
-    <strong>Request a consultation</strong><span aria-hidden="true">↗</span>
+    <strong>Free Consultation</strong><span aria-hidden="true">↗</span>
   `;
   header.insertBefore(consultationAction, header.querySelector('.header-cta'));
 }
@@ -56,7 +64,7 @@ if (consultationForm) {
       formStatus.classList.remove('is-success');
     } finally {
       submitButton.disabled = false;
-      submitButton.querySelector('strong').textContent = 'Request my free site walk';
+      submitButton.querySelector('strong').textContent = 'Request my free consultation';
     }
   });
 }
@@ -74,4 +82,17 @@ if ('IntersectionObserver' in window) {
   }, { threshold: 0.2 });
 
   revealSections.forEach((section) => revealObserver.observe(section));
+}
+
+const motionTargets = document.querySelectorAll('.services-intro, .service-card, .about-hero, .about-story-grid, .process-intro, .process-card, .consultation-layout');
+if (motionTargets.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const motionObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+  motionTargets.forEach((target) => motionObserver.observe(target));
+  document.documentElement.classList.add('motion-ready');
 }
