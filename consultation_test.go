@@ -23,7 +23,7 @@ func TestConsultationHandler(t *testing.T) {
 		if err := json.NewDecoder(r.Body).Decode(&email); err != nil {
 			t.Errorf("decode email: %v", err)
 		}
-		if email.From != "noreply@messages.englandsoftware.com" || email.To != consultationRecipient || email.ReplyTo != "person@example.com" || !strings.Contains(email.TextBody, "Project details:\nA new camera system") {
+		if email.From != "noreply@messages.englandsoftware.com" || email.To != "inquiries@example.com" || email.ReplyTo != "person@example.com" || !strings.Contains(email.TextBody, "Project details:\nA new camera system") {
 			t.Errorf("unexpected email: %+v", email)
 		}
 		w.WriteHeader(http.StatusCreated)
@@ -31,6 +31,7 @@ func TestConsultationHandler(t *testing.T) {
 	defer gateway.Close()
 	t.Setenv("EGATE_HOST", gateway.URL)
 	t.Setenv("EGATE_API_KEY", "eg_test")
+	t.Setenv("CONSULTATION_RECIPIENT_EMAIL", "inquiries@example.com")
 
 	form := url.Values{
 		"name":            {"Pat Example"},
@@ -92,5 +93,14 @@ func TestConsultationHandler(t *testing.T) {
 	t.Setenv("EGATE_API_KEY", "")
 	if got := submit(form); got.Code != http.StatusServiceUnavailable || calls.Load() != 2 {
 		t.Fatalf("missing key status = %d, gateway calls = %d", got.Code, calls.Load())
+	}
+	t.Setenv("EGATE_API_KEY", "eg_test")
+	t.Setenv("CONSULTATION_RECIPIENT_EMAIL", "")
+	if got := submit(form); got.Code != http.StatusServiceUnavailable || calls.Load() != 2 {
+		t.Fatalf("missing recipient status = %d, gateway calls = %d", got.Code, calls.Load())
+	}
+	t.Setenv("CONSULTATION_RECIPIENT_EMAIL", "invalid")
+	if got := submit(form); got.Code != http.StatusServiceUnavailable || calls.Load() != 2 {
+		t.Fatalf("invalid recipient status = %d, gateway calls = %d", got.Code, calls.Load())
 	}
 }

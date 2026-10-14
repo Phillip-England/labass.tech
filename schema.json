@@ -15,6 +15,12 @@
       "required": true
     },
     {
+      "name": "CONSULTATION_RECIPIENT_EMAIL",
+      "description": "Email address that receives consultation form submissions.",
+      "example": "support@labass.tech",
+      "required": true
+    },
+    {
       "name": "EGATE_HOST",
       "description": "Base URL of the email gateway. Defaults to https://egate.englandsoftware.com.",
       "example": "https://egate.englandsoftware.com",

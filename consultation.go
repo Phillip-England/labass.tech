@@ -15,8 +15,6 @@ import (
 	"time"
 )
 
-const consultationRecipient = "support@labass.tech"
-
 type emailRequest struct {
 	From     string `json:"from"`
 	To       string `json:"to"`
@@ -71,6 +69,13 @@ func consultationHandler(client *http.Client) http.HandlerFunc {
 			http.Error(w, `{"error":"Unable to send your request"}`, http.StatusServiceUnavailable)
 			return
 		}
+		recipient := strings.TrimSpace(os.Getenv("CONSULTATION_RECIPIENT_EMAIL"))
+		recipientAddress, recipientErr := mail.ParseAddress(recipient)
+		if recipientErr != nil || recipientAddress.Address != recipient {
+			log.Print("consultation email unavailable: CONSULTATION_RECIPIENT_EMAIL is missing or invalid")
+			http.Error(w, `{"error":"Unable to send your request"}`, http.StatusServiceUnavailable)
+			return
+		}
 		host := os.Getenv("EGATE_HOST")
 		if host == "" {
 			host = "https://egate.englandsoftware.com"
@@ -84,7 +89,7 @@ func consultationHandler(client *http.Client) http.HandlerFunc {
 
 		body, _ := json.Marshal(emailRequest{
 			From:     "noreply@messages.englandsoftware.com",
-			To:       consultationRecipient,
+			To:       recipient,
 			Subject:  "New Website Inquiry — LaBass Technologies",
 			TextBody: fmt.Sprintf("Name: %s\nPhone: %s\nEmail: %s\nOrganization / facility: %s\nPrimary service interest: %s\n\nProject details:\n%s", name, phone, email, organization, service, message),
 			ReplyTo:  email,
