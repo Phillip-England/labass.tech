@@ -1,9 +1,23 @@
 {
+  "port": { "variable": "PORT" },
+  "domains": ["labass.tech", "www.labass.tech"],
   "variables": [
     {
       "name": "PORT",
       "description": "HTTP port for the LaBass Technologies web server. Defaults to 8839.",
       "example": "8839",
+      "required": false
+    },
+    {
+      "name": "EGATE_API_KEY",
+      "description": "Private egate app key used to email consultation requests. Set this in server-side configuration.",
+      "example": "eg_your_app_key",
+      "required": true
+    },
+    {
+      "name": "EGATE_HOST",
+      "description": "Base URL of the email gateway. Defaults to https://egate.englandsoftware.com.",
+      "example": "https://egate.englandsoftware.com",
       "required": false
     }
   ]
