@@ -23,6 +23,7 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
+	mux.HandleFunc("/api/consultation", consultationHandler(http.DefaultClient))
 	mux.HandleFunc("/request-consultation/", func(w http.ResponseWriter, r *http.Request) {
 		http.Redirect(w, r, "/#contact-form", http.StatusMovedPermanently)
 	})

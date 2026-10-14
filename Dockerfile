@@ -2,7 +2,7 @@ FROM golang:1.27-alpine AS build
 
 WORKDIR /app
 COPY go.mod ./
-COPY main.go ./
+COPY *.go ./
 RUN go build -trimpath -ldflags="-s -w" -o /out/labass-tech .
 
 FROM alpine:3.22
